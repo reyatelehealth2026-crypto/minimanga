@@ -1,0 +1,306 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 33% 14%;
+    --foreground: 0 0% 100%;
+    --card: 230 40% 18%;
+    --card-foreground: 0 0% 100%;
+    --popover: 230 40% 18%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 350 80% 59%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 50% 25%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 230 30% 25%;
+    --muted-foreground: 0 0% 80%;
+    --accent: 280 70% 55%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 230 30% 30%;
+    --input: 230 30% 25%;
+    --ring: 350 80% 59%;
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    font-family: 'Noto Sans Thai', sans-serif;
+  }
+  body {
+    @apply bg-background text-foreground;
+    background: linear-gradient(180deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+}
+
+/* Manga-style border */
+.manga-border {
+  border: 3px solid #000;
+  box-shadow: 4px 4px 0 #e94560;
+}
+
+.manga-border-thick {
+  border: 4px solid #000;
+  box-shadow: 6px 6px 0 #e94560, -2px -2px 0 #533483;
+}
+
+/* Manga panel effect */
+.manga-panel {
+  background: linear-gradient(135deg, #1e1e3a 0%, #2a2a4a 100%);
+  border: 3px solid #000;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.manga-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #e94560, #533483, #e94560);
+}
+
+/* Speed lines animation */
+@keyframes speedLines {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+.speed-lines {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.speed-lines::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  background: repeating-conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 10deg,
+    rgba(233, 69, 96, 0.1) 10deg,
+    rgba(233, 69, 96, 0.1) 12deg
+  );
+  transform: translate(-50%, -50%);
+  animation: speedLines 2s ease-out infinite;
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Bounce animation */
+@keyframes bounce-manga {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.animate-bounce-manga {
+  animation: bounce-manga 0.5s ease-in-out;
+}
+
+/* Shake animation */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.animate-shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+/* Sparkle effect */
+@keyframes sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.sparkle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  animation: sparkle 1s ease-in-out infinite;
+}
+
+/* Speech bubble */
+.speech-bubble {
+  position: relative;
+  background: #fff;
+  border: 3px solid #000;
+  border-radius: 20px;
+  padding: 12px 16px;
+  color: #000;
+  font-weight: 600;
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 30px;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid #000;
+}
+
+.speech-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 33px;
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 12px solid #fff;
+  z-index: 1;
+}
+
+/* Button manga style */
+.btn-manga {
+  background: linear-gradient(135deg, #e94560 0%, #c73e54 100%);
+  border: 3px solid #000;
+  box-shadow: 4px 4px 0 #000;
+  transition: all 0.1s ease;
+}
+
+.btn-manga:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 #000;
+}
+
+/* Heart animation */
+@keyframes heartFloat {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50px) scale(1.5);
+    opacity: 0;
+  }
+}
+
+.heart-float {
+  animation: heartFloat 1s ease-out forwards;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #e94560 0%, #ff6b9d 50%, #533483 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a2e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e94560;
+  border-radius: 3px;
+}
+
+/* Bottom nav */
+.bottom-nav {
+  background: linear-gradient(180deg, rgba(26, 26, 46, 0.95) 0%, rgba(15, 15, 35, 0.98) 100%);
+  backdrop-filter: blur(10px);
+  border-top: 2px solid #e94560;
+}
+
+/* Card hover effect */
+.card-manga {
+  transition: all 0.3s ease;
+}
+
+.card-manga:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+}
+
+/* Pulse glow */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(233, 69, 96, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(233, 69, 96, 0.8);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Star twinkle */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.star-twinkle {
+  animation: twinkle 2s ease-in-out infinite;
+}
